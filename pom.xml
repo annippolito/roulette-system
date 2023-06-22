@@ -13,7 +13,7 @@
     <maven.compiler.target>11</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <lombok.version>1.18.28</lombok.version>
-    <rxjava.version>3.1.6</rxjava.version>
+    <project-reactor.version>3.5.4</project-reactor.version>
     <junit.jupiter.version>5.9.3</junit.jupiter.version>
     <logback-classic.version>1.4.7</logback-classic.version>
     <slf4j.version>2.0.7</slf4j.version>
@@ -26,11 +26,10 @@
       <version>${lombok.version}</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/io.reactivex.rxjava3/rxjava -->
     <dependency>
-      <groupId>io.reactivex.rxjava3</groupId>
-      <artifactId>rxjava</artifactId>
-      <version>${rxjava.version}</version>
+      <groupId>io.projectreactor</groupId>
+      <artifactId>reactor-core</artifactId>
+      <version>${project-reactor.version}</version>
     </dependency>
 
     <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
@@ -48,6 +47,12 @@
     </dependency>
 
     <!-- test dependencies -->
+    <dependency>
+      <groupId>io.projectreactor</groupId>
+      <artifactId>reactor-test</artifactId>
+      <version>${project-reactor.version}</version>
+      <scope>test</scope>
+    </dependency>
 
     <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
     <dependency>

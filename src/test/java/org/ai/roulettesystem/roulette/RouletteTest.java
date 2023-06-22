@@ -1,47 +1,32 @@
 package org.ai.roulettesystem.roulette;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.ai.roulettesystem.testdataproviders.PlayerDataProvider.PLAYERS;
 
 class RouletteTest {
 
-  private Roulette roulette;
-
-  @BeforeEach
-  void init() {
-    roulette = Roulette.getInstance();
-  }
-
-  @AfterEach
-  void after() {
-    roulette.getDisposable().dispose();
-  }
-
   @Test
   void getFreshInstance() {
+    Roulette roulette = new Roulette(10, PLAYERS);
+
     Assertions.assertNotNull(roulette);
-  }
+    Assertions.assertEquals(PLAYERS, roulette.getPlayers());
+    Assertions.assertEquals(10, roulette.getNumberOfSpin());
+    Assertions.assertNull(roulette.getBoulesPublisher());
+    Assertions.assertNull(roulette.getSubscription());
 
-  @Test
-  void getInstanceShouldReturnTheSameInstance() {
-    var roulette2 = Roulette.getInstance();
-
-    Assertions.assertSame(roulette, roulette2);
   }
 
   @Test
   void start() {
+    Roulette roulette = new Roulette(10, PLAYERS);
     Assertions.assertDoesNotThrow(roulette::start);
-    Assertions.assertFalse(roulette.getDisposable().isDisposed());
-  }
 
-  @Test
-  void stop() {
-    roulette.start();
-
-    Assertions.assertDoesNotThrow(roulette::stop);
-    Assertions.assertTrue(roulette.getDisposable().isDisposed());
+    var spinner = roulette.getBoulesPublisher();
+    Assertions.assertNotNull(spinner);
+    Assertions.assertNotNull(roulette.getSubscription());
+    Assertions.assertTrue(roulette.getSubscription().isDisposed());
   }
 }

@@ -1,7 +1,7 @@
 # roulette-system
-A roulette system using RxJava.
+A roulette system using projectreactor.
 
-The roulette is a stream infinite of boules. 
+The roulette is a stream N of boules. 
 On the table we can have many players subscribed to the stream.
 Each Player play accordingly to his own strategy.
 
